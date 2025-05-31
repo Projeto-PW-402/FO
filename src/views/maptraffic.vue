@@ -88,7 +88,7 @@ export default {
         // Cria um elemento script para carregar a API
         const script = document.createElement("script");
         // URL da API com a chave de desenvolvedor
-        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBPq3ozS_SgL7RGLQaBKt6SAAdsYZPBrq0`;
         script.async = true;  // Carrega de forma assíncrona
         script.defer = true;  // Adia o carregamento
         document.head.appendChild(script);

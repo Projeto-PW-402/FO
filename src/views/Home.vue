@@ -174,7 +174,7 @@ export default {
     loadGoogleMaps() {
       if (!window.google) {
         const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&libraries=visualization,geocoding`;  // Incluindo o Geocoding
+        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBPq3ozS_SgL7RGLQaBKt6SAAdsYZPBrq0&libraries=visualization,geocoding`;  // Incluindo o Geocoding
         script.defer = true;
         script.async = true;
         script.onload = this.initMap;
