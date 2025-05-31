@@ -225,6 +225,7 @@ export default {
     this.loadSavedData();
   },
   methods: {
+    
     initMaps() {
       this.overviewMap = new google.maps.Map(this.$refs.mapOverview, {
         center: { lat: 39.3999, lng: -8.2245 },
@@ -266,14 +267,33 @@ export default {
       this.overviewMap.setZoom(12);
     },
 
-    geocodeLocation(latLng) {
-      const geocoder = new google.maps.Geocoder();
-      geocoder.geocode({ location: latLng }, (results, status) => {
-        if (status === 'OK' && results[0]) {
-          this.form.address = results[0].formatted_address;
-        }
-      });
-    },
+    async geocodeLocation(latLng) {
+  const lat = latLng.lat();
+  const lng = latLng.lng();
+
+  const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`;
+
+  try {
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'SeuNomeDeAppAqui',  // obrigatório para o Nominatim
+        'Accept-Language': 'pt'             // para receber resultados em português
+      }
+    });
+    if (!response.ok) throw new Error('Erro na API de geocodificação');
+
+    const data = await response.json();
+
+    if (data && data.display_name) {
+      this.form.address = data.display_name;
+    } else {
+      this.form.address = 'Endereço não encontrado';
+    }
+  } catch (error) {
+    console.error('Erro na geocodificação:', error);
+    this.form.address = 'Erro ao obter endereço';
+  }
+},
 
     triggerPhotoInput(index) {
       this.currentPhotoIndex = index;
